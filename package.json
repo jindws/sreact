@@ -1,0 +1,20 @@
+{
+  "name": "sreact",
+  "version": "1.0.0",
+  "description": "small react",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moiamoia/sreact.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moiamoia/sreact/issues"
+  },
+  "homepage": "https://github.com/moiamoia/sreact#readme",
+  "dependencies": {}
+}
