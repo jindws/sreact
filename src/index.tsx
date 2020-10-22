@@ -1,8 +1,9 @@
 import * as React from '../react'
 import * as ReactDom  from '../react-dom'
 
-function App(){
-    return <div>1</div>
-}
+const app = <div className='test'>
+    <p>text</p>
+    <button>btn</button>
+</div>
 
-ReactDom.render(<App/>,document.getElementById('app'))
+ReactDom.render(app,document.getElementById('app'))
