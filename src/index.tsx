@@ -7,8 +7,19 @@ function Fun(props){
     </div>
 }
 
+class Cla extends React.Component{
+    private props: any;
+    constructor(props) {
+        super(props);
+    }
+
+    render(){
+        return <div>{this.props.name}</div>
+    }
+}
 
 const app = <div className='test'>
+    text
     <p>
         <ul>
             <li>1</li>
@@ -16,8 +27,20 @@ const app = <div className='test'>
             <li>3</li>
         </ul>
     </p>
-    <button>btn</button>
+    <button onClick={()=>console.log('click')}>btn</button>
     <Fun name='function'/>
+    <Cla name='class'/>
+    <>
+        Fragment
+    </>
+    <React.Fragment>
+        <div>React.Fragment</div>
+    </React.Fragment>
+    <dl>
+        {
+            [1,2,3].map(itm=><dd key={itm}>{itm}</dd>)
+        }
+    </dl>
 </div>
 
 ReactDom.render(app,document.getElementById('app'))
