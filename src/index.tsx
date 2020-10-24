@@ -8,13 +8,16 @@ function Fun(props){
 }
 
 class Cla extends React.Component{
-    private props: any;
+    private props: any
+    static defaultProps = {
+        default:'props'
+    }
     constructor(props) {
         super(props);
     }
 
     render(){
-        return <div>{this.props.name}</div>
+        return <div>{this.props.name} {this.props.default}</div>
     }
 }
 

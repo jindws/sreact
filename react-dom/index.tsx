@@ -16,7 +16,10 @@ function createNode(vnode){
     }else if(typeof type === 'function'){
         let _vnode;
         if(type.prototype.isReactComponent){
-            _vnode = new type(props).render()
+            _vnode = new type({
+                ...props,
+                ...type.defaultProps
+            }).render()
         }else{
             _vnode = type(props)
         }
@@ -27,10 +30,8 @@ function createNode(vnode){
         node = document.createDocumentFragment()
     }
 
-    update(node,props)
+    updateNode(node,props)
     childNode(props.children,node)
-
-    // props.children.forEach(itm=>render(itm,node))
     return node
 }
 
@@ -43,7 +44,7 @@ function childNode(children,node){
     })
 }
 
-function update(node,nextVal){
+function updateNode(node,nextVal){
     Object.keys(nextVal)
         .filter(itm=>itm!=='children')
         .forEach(itm=>{
