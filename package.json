@@ -16,5 +16,7 @@
     "url": "https://github.com/moiamoia/sreact/issues"
   },
   "homepage": "https://github.com/moiamoia/sreact#readme",
-  "dependencies": {}
+  "dependencies": {
+    "typescript": "^4.0.3"
+  }
 }

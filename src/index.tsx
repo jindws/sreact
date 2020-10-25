@@ -23,27 +23,27 @@ class Cla extends React.Component{
 
 const app = <div className='test'>
     text
-    <p>
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-        </ul>
-    </p>
-    <button onClick={()=>console.log('click')}>btn</button>
-    <Fun name='function'/>
-    <Cla name='class'/>
-    <>
-        Fragment
-    </>
-    <React.Fragment>
-        <div>React.Fragment</div>
-    </React.Fragment>
-    <dl>
-        {
-            [1,2,3].map(itm=><dd key={itm}>{itm}</dd>)
-        }
-    </dl>
+    {/*<p>*/}
+    {/*    <ul>*/}
+    {/*        <li>1</li>*/}
+    {/*        <li>2</li>*/}
+    {/*        <li>3</li>*/}
+    {/*    </ul>*/}
+    {/*</p>*/}
+    {/*<button onClick={()=>console.log('click')}>btn</button>*/}
+    {/*<Fun name='function'/>*/}
+    {/*<Cla name='class'/>*/}
+    {/*<>*/}
+    {/*    Fragment*/}
+    {/*</>*/}
+    {/*<React.Fragment>*/}
+    {/*    <div>React.Fragment</div>*/}
+    {/*</React.Fragment>*/}
+    {/*<dl>*/}
+    {/*    {*/}
+    {/*        [1,2,3].map(itm=><dd key={itm}>{itm}</dd>)*/}
+    {/*    }*/}
+    {/*</dl>*/}
 </div>
 
 ReactDom.render(app,document.getElementById('app'))
