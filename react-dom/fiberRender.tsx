@@ -3,6 +3,7 @@
  * @param vnode
  * @param container
  */
+import {PLACEMENT,UPDATE,DELETIONS} from "./CONST";
 
 interface Fiber{
     type?: any// ReactElement.type，也就是我们调用`createElement`的第一个参数
@@ -16,7 +17,8 @@ interface Fiber{
     node:any//真实Dom节点
     props: {
         children
-    }
+    },
+    effectTag?:'PLACEMENT'|'UPDATE'|'DELETIONS'
 }
 
 
@@ -29,7 +31,8 @@ function childNode(fiber:Fiber){
             props:itm.props,
             node:null,//新增
             base:null,//存储fiber,用于比较
-            return:fiber
+            return:fiber,
+            effectTag:PLACEMENT
         }
 
         if(oldFiber){
@@ -41,13 +44,8 @@ function childNode(fiber:Fiber){
         }else{
             prevSibling.sibling = newFiber
         }
+        prevSibling = newFiber
 
-
-
-        // if(Array.isArray(itm)){
-        //     return itm.map(it=>render(it,node))
-        // }
-        // return render(itm,node)
     })
 }
 
@@ -106,7 +104,6 @@ function createNode(fiber:Fiber){
 
 
 function updateHostComponent(fiber:Fiber){
-    console.log(fiber)
     if(!fiber.node){
         fiber.node = createNode(fiber)
     }
@@ -138,12 +135,32 @@ function runUnitWork(fiber:Fiber){
  * @param didTimeout
  */
 function workLoop({didTimeout}){
-    if(nextUnitWork&&!didTimeout){//进行下个子任务
+    while(nextUnitWork&&!didTimeout){//进行下个子任务
         nextUnitWork = runUnitWork(nextUnitWork)
     }
 
-    if(!nextUnitWork){
+    //没有子任务后
+    if(!nextUnitWork&&wipRoot){
         //commit
+        commitWorker(wipRoot.child)
+        currentRoot = wipRoot
+        wipRoot = null;
+    }
+}
+
+function commitWorker(fiber:Fiber){
+    if(fiber){
+        let parentNodeFiber:Fiber= fiber.return
+        while(!parentNodeFiber){
+            parentNodeFiber = parentNodeFiber.return
+        }
+        const parentNode = parentNodeFiber.node;
+
+        if(fiber.effectTag === 'PLACEMENT' && fiber.node){
+            parentNode.appendChild(fiber.node)
+        }
+        commitWorker(fiber.child)
+        commitWorker(fiber.sibling)
     }
 }
 

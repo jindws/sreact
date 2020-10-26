@@ -23,6 +23,8 @@ class Cla extends React.Component{
 
 const app = <div className='test'>
     text
+    <div>div</div>
+    <span>span</span>
     {/*<p>*/}
     {/*    <ul>*/}
     {/*        <li>1</li>*/}
