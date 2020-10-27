@@ -23,7 +23,8 @@ interface Fiber{
 
 
 function childNode(fiber:Fiber){
-    const {children} = fiber.props;
+    const children = fiber.props?.children;
+    if(!children)return
     let oldFiber = fiber.base?.child,prevSibling;
     children.forEach((itm,index)=>{
         let newFiber:Fiber = {
@@ -93,11 +94,28 @@ function createNode(fiber:Fiber){
     let node;
     if(type === 'TEXT'){
         node = document.createTextNode('')
+    }else if(typeof type === 'function'){
+        if(type.prototype.isReactComponent){
+            fiber.props.children = [new type({
+                ...props,
+                ...type.defaultProps
+            }).render()]
+        }else{
+            fiber.props.children = [type(props)]
+        }
+        childNode(fiber)
     }else if(type){
+        if(Array.isArray(props.children[0])){
+            fiber.props.children = props.children[0]
+            console.log(fiber.props.children)
+        }
         node = document.createElement(type)
+        childNode(fiber)
+
     }
 
-    updateNode(node,props)
+
+    node&&updateNode(node,props)
     // childNode(props.children,node)
     return node
 }
@@ -151,7 +169,7 @@ function workLoop({didTimeout}){
 function commitWorker(fiber:Fiber){
     if(fiber){
         let parentNodeFiber:Fiber= fiber.return
-        while(!parentNodeFiber){
+        while(!parentNodeFiber.node){
             parentNodeFiber = parentNodeFiber.return
         }
         const parentNode = parentNodeFiber.node;
