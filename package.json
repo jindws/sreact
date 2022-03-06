@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/moiamoia/sreact#readme",
   "dependencies": {
-    "typescript": "^4.0.3"
+    "typescript": "^4.6.2"
   }
 }
