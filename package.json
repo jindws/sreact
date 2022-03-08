@@ -18,5 +18,8 @@
   "homepage": "https://github.com/moiamoia/sreact#readme",
   "dependencies": {
     "typescript": "^4.6.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
   }
 }

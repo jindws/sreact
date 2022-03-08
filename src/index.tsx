@@ -2,6 +2,10 @@ import * as React from '../react'
 import * as ReactDom  from '../react-dom'
 
 function Fun(props){
+    React.useEffect(()=>{
+        console.log('useEffect')
+        return ()=>console.log('stop')
+    },[])
     return <div className={props.name}>
         {props.name}
     </div>

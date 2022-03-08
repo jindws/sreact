@@ -14,7 +14,7 @@ interface Fiber{
     // 兄弟节点的return指向同一个父节点
     sibling?: Fiber | null
     base: Fiber | null
-    node:any//真实Dom节点
+    node:Element//真实Dom节点
     props: {
         children
     },
@@ -182,6 +182,6 @@ function commitWorker(fiber:Fiber){
     }
 }
 
-(window as any).requestIdleCallback(workLoop)
+window.requestIdleCallback(workLoop)
 
 export default render
